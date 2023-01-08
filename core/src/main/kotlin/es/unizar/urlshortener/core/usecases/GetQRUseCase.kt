@@ -1,7 +1,7 @@
 package es.unizar.urlshortener.core.usecases
 
-import es.unizar.urlshortener.core.QRException
 import es.unizar.urlshortener.core.QRService
+import es.unizar.urlshortener.core.RedirectionNotFound
 import es.unizar.urlshortener.core.ShortUrlRepositoryService
 import org.springframework.core.io.ByteArrayResource
 
@@ -28,7 +28,7 @@ class GetQRUseCaseImpl(
             if (shortUrl != null) {
                 qrService.getQR(shortUrl.redirection.target)
             } else {
-                throw QRException(hash)
+                throw RedirectionNotFound(hash)
             }
-        } ?: throw QRException(hash)
+        } ?: throw RedirectionNotFound(hash)
 }

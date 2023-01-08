@@ -1,7 +1,7 @@
 package es.unizar.urlshortener.infrastructure.delivery
 
-import es.unizar.urlshortener.core.QRException
 import es.unizar.urlshortener.core.QRService
+import es.unizar.urlshortener.core.RedirectionNotFound
 import es.unizar.urlshortener.core.ShortUrlRepositoryService
 import es.unizar.urlshortener.core.usecases.GetQRUseCaseImpl
 import io.github.g0dkar.qrcode.QRCode
@@ -62,7 +62,7 @@ class FunctionalitiesTest {
         val x = GetQRUseCaseImpl(shortUrlRepository, qrService)
         try {
             x.generateQR("test")
-        } catch (e: QRException) {
+        } catch (e: RedirectionNotFound) {
             println("Escepción capturada, test correcto")
         }
     }
